@@ -123,7 +123,7 @@ const jobs = [
   },
 ]
 
-// PARTE 1
+// PARTE1
 
 const jobFinder = function (jobPosition, location) {    //creo una funzione che accetta due parametri che saranno i due input di ricerca
   const searchResult = []                               //creo l'array vuoto che successivamente conterrà i risultati della ricerca
@@ -133,14 +133,34 @@ const jobFinder = function (jobPosition, location) {    //creo una funzione che 
       searchResult.push(arrayExtraction)                //inserisco ogni risultato buono dentro l'array pre-inizializzato
     }
   }
-  return finalObj = {                         //restituisco l'oggetto contenente due parametri: l'array dei risultati e il conteggio 
+  finalObj = {                         //restituisco l'oggetto contenente due parametri: l'array dei risultati e il conteggio 
     results: searchResult,
     count: searchResult.length
   }
+  for (i=0; i<searchResult.length; i++) {       //imposto un ciclo for per entrare nell'array dei risultati
+    document.querySelector(".bulletPointList").innerHTML += "<li>" + finalObj.results[i].title + "<br>" + finalObj.results[i].location + "</li>"      // creo le liste non ordinate e indico i risultati da stampare
+  }
+  document.querySelector(".counter").innerHTML = "Risultati trovati: " + finalObj.count     //stampo anche il conteggio in un altro paragrafo
+  document.querySelector("#description").value = ""           //svuoto i campi di input per rendere più semplice eseguire una nuova ricerca
+  document.querySelector("#location").value = ""
 }
 
-let finalResult = jobFinder ("customer", "us")
-console.log(finalObj)
+// let finalResult = jobFinder ("customer", "us")     // lascio il richiamo della funzione commentato così da non eseguirla durante la Parte 2
+// console.log(finalObj)
 
 // PARTE 2
 
+  // 
+
+const searchFnc = function () {           //creo la funzione che viene richiamata dall'event listener
+  document.querySelector(".bulletPointList").innerHTML = ""       //svuoto la lista dei risultati stampati per poter inserire quelli della nuova ricerca
+  const jobPosition = document.querySelector("#description").value      //assegno al primo parametro della funzione jobFinder il vaolre dell'input con la job description
+  const location = document.querySelector("#location").value            //assegno al secondo parametro della funzione jobFinder il vaolre dell'input con la location
+  if (jobPosition.trim().length > 0 && location.trim().length > 0) {      //controllo che entrambi gli input non siano vuoti o composti da soli spazi
+    jobFinder (jobPosition, location)                       // se i campi non sono vuoti richiamo la funzione dei ricerca
+    }
+  else {                                // in alternativa mando un alert
+    alert("Please provide all the information required")
+  }
+}
+document.querySelector("#searchButton").addEventListener("click", searchFnc)        //creo l'event listener per recepire l'evento click sul bottone configurato in HTML e richiamo la funzione associata
