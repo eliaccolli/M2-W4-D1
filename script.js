@@ -154,6 +154,7 @@ const jobFinder = function (jobPosition, location) {    //creo una funzione che 
 
 const searchFnc = function () {           //creo la funzione che viene richiamata dall'event listener
   document.querySelector(".bulletPointList").innerHTML = ""       //svuoto la lista dei risultati stampati per poter inserire quelli della nuova ricerca
+  document.querySelector(".counter").innerHTML=""                 //svuoto il contatore risultati stampati per poter inserire quelli della nuova ricerca (utile se dopo una ricerca con entrambi i campi compilati se ne fa una senza un campo)
   const jobPosition = document.querySelector("#description").value      //assegno al primo parametro della funzione jobFinder il vaolre dell'input con la job description
   const location = document.querySelector("#location").value            //assegno al secondo parametro della funzione jobFinder il vaolre dell'input con la location
   if (jobPosition.trim().length > 0 && location.trim().length > 0) {      //controllo che entrambi gli input non siano vuoti o composti da soli spazi
